@@ -1,0 +1,138 @@
+.my-tickets-container {
+  flex: 1;
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tickets-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.tickets-header {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.tickets-header h1 {
+  font-size: 32px;
+  margin: 0 0 10px 0;
+}
+
+.tickets-header p {
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.tickets-table-wrapper {
+  padding: 30px 40px;
+  overflow-x: auto;
+}
+
+.tickets-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tickets-table th {
+  text-align: left;
+  padding: 16px 12px;
+  background: #f8fafc;
+  color: #1e40af;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.tickets-table td {
+  padding: 20px 12px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tickets-table tr:hover {
+  background: #f0f9ff;
+}
+
+.ticket-id {
+  font-weight: 600;
+  color: #1e40af;
+}
+
+.ticket-title {
+  font-weight: 500;
+  color: #1f2937;
+  max-width: 400px;
+}
+
+.status-badge, .priority-badge {
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.status-badge.open { background: #fee2e2; color: #ef4444; }
+.status-badge.in-progress { background: #fef3c7; color: #f59e0b; }
+.status-badge.resolved { background: #dbeafe; color: #3b82f6; }
+.status-badge.closed { background: #f0fdf4; color: #10b981; }
+
+.priority-badge.low { background: #f0fdf4; color: #10b981; }
+.priority-badge.medium { background: #fffbeb; color: #f59e0b; }
+.priority-badge.high { background: #fef2f2; color: #ef4444; }
+
+.view-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.view-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.tickets-footer {
+  padding: 30px 40px;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.back-btn {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 12px 24px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 992px) {
+  .my-tickets-container {
+    padding: 20px;
+  }
+  .tickets-table-wrapper {
+    padding: 20px;
+  }
+}

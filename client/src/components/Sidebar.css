@@ -1,0 +1,200 @@
+.final-sidebar {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  z-index: 1000;
+}
+
+/* Profile Picture - Top & Visible */
+.profile-section {
+  /* position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  transition: left 0.4s ease;
+  top: 10px; */
+  width: 60px;
+  height: 60px;
+}
+
+.profile-avatar {
+  display: block; /* Change from flex to block for absolute positioning */
+  position: relative; /* Ensure absolute tooltip is relative to this */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  box-shadow: 0 0 35px rgba(59, 130, 246, 0.4);
+}
+
+.profile-avatar:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.15);
+}
+
+.profile-avatar.active {
+  background: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid rgba(59, 130, 246, 0.6);
+}
+
+
+.profile-avatar::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 80px; /* Adjusted for small size */
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 41, 59, 0.95);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+
+.profile-avatar:hover::after {
+  opacity: 1;
+  visibility: visible;
+  left: 130px;
+}
+
+/* Glass Rectangle - Perfect Height & Fit */
+.glass-rectangle {
+  width: 90px;
+  background: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px 0; 
+  height: 700px; /* Perfect height — all items visible */
+  max-height: 92vh;
+}
+
+/* Main Icons - Perfect Spacing */
+.icons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px; /* Perfect gap */
+}
+
+/* Bottom Icons - Same Spacing */
+.bottom-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* All Icons - Same Size */
+.icon-item {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.icon-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.icon-item.active {
+  background: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+}
+
+.sidebar-icon {
+  font-size: 26px;
+  color: white;
+}
+
+/* Theme Toggle & Logout - Same Size & Visible */
+.logout-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout-btn {
+  color: #fca5a5;
+  background:#fca5a5 ;
+}
+
+.logout-btn:hover {
+  background: rgba(232, 7, 7, 0.777);
+  color: rgb(255, 255, 255);
+}
+
+/* Tooltip on Hover */
+.icon-item::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 120px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(30, 41, 59, 0.95);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  pointer-events: none;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.icon-item:hover::after {
+  opacity: 1;
+  visibility: visible;
+  left: 130px;
+}
+
+/* No gap on left */
+.main-content {
+  margin-left: 100px !important;
+  transition: margin-left 0.5s ease;
+}
