@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaTicketAlt, FaSpinner, FaCheck, FaTimes, FaSearch, FaBell, FaQuestionCircle, FaUserCircle, FaEye, FaHistory, FaClipboardList } from 'react-icons/fa';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';import './UserDashboard.css';
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';  // All recharts imports
+import './UserDashboard.css';
 import Sidebar from '../../components/Sidebar';
 
 const UserDashboard = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [count, setCount] = useState(0);  // For count-up animation in center
 
-  useEffect(() => {
-    const timer = setInterval(() => setCount((prev) => {
-      if (prev < 45) return prev + 1;
-      clearInterval(timer);
-      return 45;
-    }), 50);
-    return () => clearInterval(timer);
-  }, []);
+  // Stat data for cards
+  const stats = {
+    totalTickets: 45,
+    resolved: 12,
+    pending: 33,
+    messages: 5,
+  };
 
-  const stats = [
-    { title: 'Open Tickets', value: '8', subtitle: 'Last Week-10', icon: FaTicketAlt, color: '#3b82f6', bgImg: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop&crop=entropy' },
-    { title: 'In Progress', value: '5', subtitle: 'Last Week-7', icon: FaSpinner, color: '#f59e0b', bgImg: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=200&h=200&fit=crop&crop=entropy' },
-    { title: 'Resolved', value: '12', subtitle: 'Last Week-15', icon: FaCheck, color: '#10b981', bgImg: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=200&fit=crop&crop=entropy' },
-    { title: 'Closed', value: '20', subtitle: 'Last Week-25', icon: FaTimes, color: '#ef4444', bgImg: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=200&h=200&fit=crop&crop=entropy' },
+  // Donut Chart Data (Ticket Status)
+  const donutData = [
+    { name: 'Open', value: 8, fill: '#3b82f6' },
+    { name: 'In Progress', value: 5, fill: '#f59e0b' },
+    { name: 'Resolved', value: 12, fill: '#10b981' },
+    { name: 'Closed', value: 20, fill: '#ef4444' },
   ];
 
-  const chartData = [
-    { name: 'Open', value: 8, fill: 'url(#openGradient)' },
-    { name: 'In Progress', value: 5, fill: 'url(#progressGradient)' },
-    { name: 'Resolved', value: 12, fill: 'url(#resolvedGradient)' },
-    { name: 'Closed', value: 20, fill: 'url(#closedGradient)' },
+  // Bar Chart Data (Priority-wise Tickets)
+  const barData = [
+    { name: 'High', value: 15 },
+    { name: 'Medium', value: 20 },
+    { name: 'Low', value: 10 },
   ];
 
   const recentTickets = [
@@ -56,133 +56,128 @@ const UserDashboard = () => {
 
       <div className="main-content">
         {/* Welcome / Quick Actions */}
-        <div className="welcome-section">
-          <div className="welcome-left">
-            <div className="user-avatar">
-              <FaUserCircle />
-            </div>
-            <div className="welcome-text">
-              <h1>Welcome Back, User!</h1>
-              <p>Here's a quick overview of your support activity</p>
-            </div>
-          </div>
-          <div className="quick-actions">
-            <NavLink to="/user/new-ticket" className="raise-btn">
-              <FaTicketAlt /> Raise New Ticket
-            </NavLink>
-            <NavLink to="/user/tickets" className="view-btn">
-              <FaClipboardList /> View My Tickets
-            </NavLink>
-            <NavLink to="/user/history" className="history-btn">
-              <FaHistory /> Ticket History
-            </NavLink>
-          </div>
-        </div>
+<div className="welcome-section">
+  <div className="welcome-left">
+    <div className="user-avatar">
+      <FaUserCircle className="avatar-icon" />
+    </div>
+    <div className="welcome-text">
+      <h1>Welcome Back, User!</h1>
+      <p>Here's a quick overview of your support activity</p>
+    </div>
+  </div>
+  <div className="quick-actions">
+    <NavLink to="/user/new-ticket" className="raise-btn">
+      <FaTicketAlt /> Raise New Ticket
+    </NavLink>
+    <NavLink to="/user/tickets" className="view-btn">
+      <FaClipboardList /> View My Tickets
+    </NavLink>
+    <NavLink to="/user/history" className="history-btn">
+      <FaHistory /> Ticket History
+    </NavLink>
+  </div>
+</div>
 
         <div className="dashboard-grid">
-          {/* Summary Cards – Enhanced Uiverse Style */}
-          <div className="stats-section">
-            {stats.map((stat, index) => (
-              <div key={index} className="card work" style={{ '--play': stat.color, backgroundImage: stat.bgImg }}>
-                <div className="img-section">
-                  <stat.icon className="stat-icon-svg" style={{ color: 'white' }} />
-                </div>
-                <div className="card-desc">
-                  <div className="card-header">
-                    <div className="card-title">{stat.title}</div>
-                    <div className="card-menu">
-                      <div className="dot"></div>
-                      <div className="dot"></div>
-                      <div className="dot"></div>
-                    </div>
-                  </div>
-                  <div className="card-time">{stat.value}</div>
-                  <p className="recent">{stat.subtitle}</p>
-                </div>
-              </div>
-            ))}
+          {/* Stat Cards – Your Grid Structure (Plain Divs, No shadcn) */}
+         {/* Stat Cards – Colorful Grid Matching Image */}
+<div className="stats-section">
+  <div className="grid grid-cols-4 gap-6">
+    {[
+      { label: 'Total Tickets', value: '514', icon: FaTicketAlt, bgColor: '#10b981' },
+      { label: 'Resolved', value: '61.50', icon: FaCheck, bgColor: '#ec4899' },
+      { label: 'Pending', value: '0850', icon: FaSpinner, bgColor: '#8b5cf6' },
+      { label: 'Messages', value: '0312', icon: FaBell, bgColor: '#f59e0b' },
+    ].map((item, i) => (
+      <div key={i} className="stat-card" style={{ backgroundColor: item.bgColor }}>
+        <div className="stat-card-content">
+          <div className="stat-icon-wrapper" style={{ color: item.bgColor }}>
+            <item.icon />
           </div>
+          <p className="text-sm text-gray-400">{item.label}</p>
+          <h2 className="text-3xl font-bold text-white">{item.value}</h2>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
-          {/* Status Chart & Recent Tickets */}
-          <div className="chart-section">
+          {/* Charts Section – Donut (Ticket Status) & Bar (Priority-wise) */}
+          <div className="charts-section">
+            {/* 1. Donut Chart – Ticket Status */}
             <div className="chart-card">
-              <h2>Ticket Status Overview</h2>
-              <ResponsiveContainer width="100%" height={300}>
+              <h2>Ticket Status</h2>
+              <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
-                  <defs>
-                    <linearGradient id="openGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#3b82f6" />
-                      <stop offset="100%" stopColor="#1d4ed8" />
-                    </linearGradient>
-                    <linearGradient id="progressGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#f59e0b" />
-                      <stop offset="100%" stopColor="#d97706" />
-                    </linearGradient>
-                    <linearGradient id="resolvedGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#10b981" />
-                      <stop offset="100%" stopColor="#059669" />
-                    </linearGradient>
-                    <linearGradient id="closedGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#ef4444" />
-                      <stop offset="100%" stopColor="#dc2626" />
-                    </linearGradient>
-                  </defs>
-                  <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} innerRadius={50}>
-                    {chartData.map((entry, index) => (
+                  <Pie data={donutData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} innerRadius={50}>
+                    {donutData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.fill} />
                     ))}
                   </Pie>
                   <Tooltip formatter={(value) => [`${value} tickets`, 'Status']} />
+                  <Legend />
                 </PieChart>
-                <div className="chart-center">
-                  <h3>Total Tickets</h3>
-                  <p>{count}</p>
-                </div>
               </ResponsiveContainer>
             </div>
 
-            <div className="recent-tickets-card">
-              <h2>Recent Tickets</h2>
-              <div className="tickets-table">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Subject</th>
-                      <th>Status</th>
-                      <th>Priority</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentTickets.map((ticket, index) => (
-                      <tr key={index}>
-                        <td>{ticket.id}</td>
-                        <td>{ticket.subject}</td>
-                        <td>
-                          <span className={`status-badge ${ticket.status.toLowerCase()}`}>
-                            {ticket.status}
-                          </span>
-                        </td>
-                        <td>
-                          <span className={`priority-badge ${ticket.priority.toLowerCase()}`}>
-                            {ticket.priority}
-                          </span>
-                        </td>
-                        <td>
-                          <NavLink to={`/user/ticket/${ticket.id}`} className="view-btn-small">
-                            <FaEye /> View
-                          </NavLink>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            {/* 2. Bar Chart – Priority-wise Tickets */}
+            <div className="bar-chart-card">
+              <h2>Priority-wise Tickets</h2>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={barData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+                  <XAxis dataKey="name" stroke="#64748b" />
+                  <YAxis stroke="#64748b" />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
-          </div>j
+          </div>
 
-          {/* Notifications */}
+          {/* 4. Recent Tickets Table */}
+          <div className="recent-tickets-section">
+            <h2>Recent Tickets</h2>
+            <div className="tickets-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {recentTickets.map((ticket, index) => (
+                    <tr key={index}>
+                      <td>{ticket.id}</td>
+                      <td>{ticket.subject}</td>
+                      <td>
+                        <span className={`status-badge ${ticket.status.toLowerCase()}`}>
+                          {ticket.status}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={`priority-badge ${ticket.priority.toLowerCase()}`}>
+                          {ticket.priority}
+                        </span>
+                      </td>
+                      <td>
+                        <NavLink to={`/user/ticket/${ticket.id}`} className="view-btn-small">
+                          <FaEye /> View
+                        </NavLink>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 5. Notifications */}
           <div className="notifications-section">
             <h2>Notifications</h2>
             <div className="notifications-list">
