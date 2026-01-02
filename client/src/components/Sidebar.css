@@ -10,25 +10,14 @@
   z-index: 1000;
 }
 
-/* Profile Picture - Top & Visible */
-.profile-section {
-  /* position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1001;
-  transition: left 0.4s ease;
-  top: 10px; */
-  width: 60px;
-  height: 60px;
-}
-
+/* Profile Avatar - Tooltip Fixed */
 .profile-avatar {
-  display: block; /* Change from flex to block for absolute positioning */
-  position: relative; /* Ensure absolute tooltip is relative to this */
+  display: block;
+  position: relative;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  overflow: hidden;
+  overflow: visible; /* ← Changed to visible - no clipping */
   transition: all 0.4s ease;
   cursor: pointer;
   box-shadow: 0 0 35px rgba(59, 130, 246, 0.4);
@@ -52,11 +41,11 @@
   border: 2px solid rgba(59, 130, 246, 0.6);
 }
 
-
+/* Tooltip for Profile - Fixed Position & No Clip */
 .profile-avatar::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 80px; /* Adjusted for small size */
+  left: 95px; /* ← Adjusted for 60px size - perfect spacing */
   top: 50%;
   transform: translateY(-50%);
   background: rgba(30, 41, 59, 0.95);
@@ -76,11 +65,10 @@
   backdrop-filter: blur(10px);
 }
 
-
 .profile-avatar:hover::after {
   opacity: 1;
   visibility: visible;
-  left: 130px;
+  left: 105px; /* ← Adjusted hover position */
 }
 
 /* Glass Rectangle - Perfect Height & Fit */

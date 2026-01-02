@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // User Pages
-import Dashboard from "./pages/user/Dashboard";
+import UserDashboard from "./pages/user/UserDashboard";
 import MyTickets from "./pages/user/MyTickets";
 import NewTicket from "./pages/user/NewTicket";
 import TicketHistory from "./pages/user/TicketHistory";
@@ -34,7 +34,7 @@ function App() {
   <Route path="/register" element={<Register />} />
 
   {/* User Routes */}
-  <Route path="/user/dashboard" element={<Dashboard />} />
+  <Route path="/user/dashboard" element={<UserDashboard />} />
   <Route path="/user/tickets" element={<MyTickets />} />
   <Route path="/user/new-ticket" element={<NewTicket />} />
   <Route path="/user/history" element={<TicketHistory />} />
